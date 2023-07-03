@@ -39,7 +39,7 @@ class _MenuPerusahaanState extends State<MenuPerusahaan> {
         backgroundColor: Colors.red,
         title: Text("PURWOKERTO JOB FAIR"),
       ),
-      drawer: Drawer(
+       drawer: Drawer(
         // Sidebar menu
         child: ListView(
           padding: EdgeInsets.zero,
