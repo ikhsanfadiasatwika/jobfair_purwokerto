@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-//detail-postingan
+import 'package:layout/screen/sidebar.dart';
 
-void main() {
-  // debugPaintSizeEnabled = true;
-  runApp(const MyApp());
-}
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+// Uncomment lines 3 and 6 to view the visual layout at runtime.
+// import 'package:flutter/rendering.dart' show debugPaintSizeEnabled;
+
+class MyaboutApp extends StatelessWidget {
+  const MyaboutApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,86 +23,63 @@ class MyApp extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.only(bottom: 8),
                   child: const Text(
-                    'Nama Perusahaan',
+                    'JOB FAIR PURWOKERTO',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 25,
                     ),
                   ),
                 ),
-                Text(
-                  'Lokasi : purwokerto utara',
-                  style: TextStyle(
-                    color: Colors.grey[500],
-                  ),
-                ),
                 Container(
-                  padding: const EdgeInsets.only(left: 50,top: 10,bottom: 10),
-                  child: const Text("Rp.4.000.000",
-                  
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 40,
-                      color: Color.fromARGB(255, 255, 0, 0),
-                    
-                    ),
-                    ),
-                ),
-                Container(
-                  padding: const EdgeInsets.only(bottom: 8),
+                  padding: const EdgeInsets.only(bottom: 8,top: 20,left: 120),
                   child: const Text(
-                    'job Desk : IT analis',
+                    'Tentang Aplikasi',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),
-                Text(
-                  'Persyaratan :',
-                  style: TextStyle(
-                    color: Colors.grey[500],
-                  ),
-                ),
+                
                 Container(
                   padding: const EdgeInsets.only(bottom: 8,top: 10),
                   child: const Text(
-                    '- Umur minimal 18\n'
-                    '- pendidikan minimal S1\n'
-                    '- berpengalaman\n'
-                    '- memahamin oop\n',
+                    'Aplikasi mobile ini sebagai wadah untuk perusahaan yang ingin merekrut karyawan dan bagi orang yang '
+                    'ingin mencari informasi lowongan kerja khususnya untuk wilayah purwokerto. Aplikasi ini berisikan profil '
+                    'dan informasi perusahaan serta kita dapat melihat apakah perusahaan yang sedang membutuhkan karyawan Sesuai '
+                    'dengan spesifikasi dan posisi yang ditawarkan oleh '
+                    'perusahaan tersebut. Didalam aplikasi “purwokerto job fair” terdapat pilihan menu yang dapat diakses.',
                     
                     style: TextStyle(
-                      fontWeight: FontWeight.bold,
+                      
+                       color: Color.fromARGB(255, 51, 51, 51),
                     ),
                   ),
                 ),
-                Container(
-                  padding: EdgeInsets.all(7),
-                  child: Column(children: [
-                    SizedBox(height: 7),
-                  ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      primary: Color.fromARGB(255, 117, 12, 101),
-                      padding: EdgeInsets.symmetric(horizontal: 80, vertical: 16),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                    child: Text('Email : telkom@tlkm.com'),
-                  ),
-                  ]),
-                ),
+               
                     Container(
                     padding: const EdgeInsets.only(top: 60, left: 70),
                     child: const Text(
-                    'Tentang perusahaan\n',
+                    'Anggota Kelompok\n',
                       style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 20,
                     ),
                   ),
-    ),
+                 ),
+                 Container(
+                  padding: const EdgeInsets.only(bottom: 8,top: 10, left: 50),
+                  child: const Text(
+                    '- Ikhsan fadia satwika (22SA11B011)\n'
+                    '- Zakki khaerul umam (21SA1065)\n'
+                    '- Muhammad ahdi nur fikri (21SA1197)\n'
+                    '- Virgina sera Yuliani (21SA1045)\n'
+                    '- Rahmatia (21SA1164)\n',
+                    
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
@@ -113,19 +89,7 @@ class MyApp extends StatelessWidget {
       
     );
 
-    Widget textSection = const Padding(
-      padding: EdgeInsets.all(32),
-      child: Text(
-        'Lake Oeschinen lies at the foot of the Blüemlisalp in the Bernese '
-        'Alps. Situated 1,578 meters above sea level, it is one of the '
-        'larger Alpine Lakes. A gondola ride from Kandersteg, followed by a '
-        'half-hour walk through pastures and pine forest, leads you to the '
-        'lake, which warms to 20 degrees Celsius in the summer. Activities '
-        'enjoyed here include rowing, and riding the summer toboggan run.',
-        softWrap: true,
-      ),
-      
-    );
+
 
     return MaterialApp(
       title: 'Detail Postingan',
@@ -134,20 +98,29 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Detail Postingan'),
-        ),
+         floatingActionButton: FloatingActionButton(
+    onPressed: () {
+      // Tambahkan logika yang ingin Anda jalankan saat tombol ditekan
+    },
+    child: Icon(Icons.add),backgroundColor: Colors.red,
+  ),
+   floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      appBar: AppBar(
+        backgroundColor: Colors.red,
+        title: Text("PURWOKERTO JOB FAIR"),
+      ),
+        drawer: CustomAppBar(),
         body: ListView(
           children: [
             Image.asset(
-              'assets/images/telkom.jpg',
+              'assets/images/amikom.jpg',
               width: 600,
               height: 240,
               fit: BoxFit.cover,
             ),
             titleSection,
 
-            textSection,
+
           ],
         ),
       ),

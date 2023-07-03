@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:layout/screen/menu_home.dart';
+import 'package:layout/screen/signup.dart';
 
-void main() {
-  runApp(LoginApp());
-}
+
 
 class LoginApp extends StatelessWidget {
   @override
@@ -66,7 +66,12 @@ class LoginPage extends StatelessWidget {
                   ),
                   SizedBox(height: 20),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      // Aksi yang akan dijalankan saat tombol "signup" ditekan
+                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context){
+                        return MenuHomeApp();
+                      }));
+                    },
                     style: ElevatedButton.styleFrom(
                       primary: Colors.red,
                       padding: EdgeInsets.symmetric(horizontal: 40, vertical: 16),
@@ -76,6 +81,25 @@ class LoginPage extends StatelessWidget {
                     ),
                     child: Text('Login'),
                   ),
+                   SizedBox(height: 10),
+                    
+                    TextButton(
+                      onPressed: () {
+                        // Aksi yang akan dijalankan saat tombol "signup" ditekan
+                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context){
+                        return SignUpApp();
+                      }));
+                      },
+                      child: Text(
+                        'Signup',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.red,
+                        ),
+                      ),
+                    ),
+                    Padding(padding: EdgeInsets.only(bottom: 50)),
                 ],
               ),
             ),
