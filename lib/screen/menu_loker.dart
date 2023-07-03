@@ -1,82 +1,44 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:layout/screen/sidebar.dart';
 
-void main() {
-  runApp(MyApp());
-}
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+
+class MylokerApp extends StatelessWidget {
+  const MylokerApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: MenuPerusahaan(),
+      home: Menuloker(),
       debugShowCheckedModeBanner: false,
     );
   }
 }
 
-class MenuPerusahaan extends StatefulWidget {
-  const MenuPerusahaan({super.key});
+class Menuloker extends StatefulWidget {
+  const Menuloker({super.key});
 
   @override
-  State<MenuPerusahaan> createState() => _MenuPerusahaanState();
+  State<Menuloker> createState() => _MenulokerState();
 }
 
-class _MenuPerusahaanState extends State<MenuPerusahaan> {
+class _MenulokerState extends State<Menuloker> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+    onPressed: () {
+      // Tambahkan logika yang ingin Anda jalankan saat tombol ditekan
+    },
+    child: Icon(Icons.add),backgroundColor: Colors.red,
+  ),
+   floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       appBar: AppBar(
         backgroundColor: Colors.red,
         title: Text("PURWOKERTO JOB FAIR"),
       ),
-      drawer: Drawer(
-        // Sidebar menu
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: [
-            DrawerHeader(
-              child: Text(
-                'Menu',
-                style: TextStyle(fontSize: 24.0),
-              ),
-              decoration: BoxDecoration(
-                color: Colors.red,
-              ),
-            ),
-            ListTile(
-              leading: Icon(Icons.home), // Ikon "Home"
-              title: Text('Home'),
-              onTap: () {
-                // Aksi ketika item di sidebar ditekan
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.home), // Ikon "Home"
-              title: Text('Item 2'),
-              onTap: () {
-                // Aksi ketika item di sidebar ditekan
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.info), // Ikon "Home"
-              title: Text('About'),
-              onTap: () {
-                // Aksi ketika item di sidebar ditekan
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.exit_to_app), // Ikon "Home"
-              title: Text('Logout'),
-              onTap: () {
-                // Aksi ketika item di sidebar ditekan
-              },
-            ),
-          ],
-        ),
-      ),
+       drawer: CustomAppBar(),
       
       body: SafeArea(
         child: Column(

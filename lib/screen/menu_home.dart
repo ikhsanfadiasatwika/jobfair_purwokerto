@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:layout/screen/menu_loker.dart';
+import 'package:layout/screen/menu_prusahan.dart';
 
-void main() {
-  runApp(SignUpApp());
-}
+
 
 //menu home
-class SignUpApp extends StatelessWidget {
+class MenuHomeApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -14,12 +14,12 @@ class SignUpApp extends StatelessWidget {
         primarySwatch: Colors.red,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: SignUpPage(),
+      home: MenuHomePage(),
     );
   }
 }
 
-class SignUpPage extends StatelessWidget {
+class MenuHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,7 +52,12 @@ class SignUpPage extends StatelessWidget {
                   children: [
                     SizedBox(height: 20),
                     ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                              // Aksi yang akan dijalankan saat tombol "signup" ditekan
+                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context){
+                        return MylokerApp();
+                      }));
+                      },
                       style: ElevatedButton.styleFrom(
                         primary: Colors.red,
                         padding: EdgeInsets.symmetric(horizontal: 100, vertical: 20),
@@ -64,7 +69,12 @@ class SignUpPage extends StatelessWidget {
                     ),
                     SizedBox(height: 10 ,width: 500,),
                     ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                              // Aksi yang akan dijalankan saat tombol "signup" ditekan
+                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context){
+                        return PerushaanApp();
+                      }));
+                      },
                       style: ElevatedButton.styleFrom(
                         primary: Colors.red,
                         padding: EdgeInsets.symmetric(horizontal: 93, vertical: 20),

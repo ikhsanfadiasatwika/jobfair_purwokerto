@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:layout/screen/sidebar.dart';
 //detail-postingan
 
 void main() {
@@ -134,9 +135,18 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Detail Postingan'),
-        ),
+        floatingActionButton: FloatingActionButton(
+    onPressed: () {
+      // Tambahkan logika yang ingin Anda jalankan saat tombol ditekan
+    },
+    child: Icon(Icons.add),backgroundColor: Colors.red,
+  ),
+   floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      appBar: AppBar(
+        backgroundColor: Colors.red,
+        title: Text("PURWOKERTO JOB FAIR"),
+      ),
+       drawer: CustomAppBar(),
         body: ListView(
           children: [
             Image.asset(
