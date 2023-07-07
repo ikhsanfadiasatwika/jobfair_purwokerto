@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:layout/screen/menu_loker.dart';
+import 'package:layout/screen/menu_loker_admin.dart';
 import 'package:layout/screen/menu_prusahan.dart';
 
 
@@ -9,6 +9,7 @@ class MenuHomeApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Home',
       theme: ThemeData(
         primarySwatch: Colors.red,

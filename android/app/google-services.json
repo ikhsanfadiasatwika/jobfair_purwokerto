@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "271209128048",
+    "project_id": "job-fair-purwokerto",
+    "storage_bucket": "job-fair-purwokerto.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:271209128048:android:4d84a95d636839ad0a14b5",
+        "android_client_info": {
+          "package_name": "com.example.jobfair_purwokerto"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "271209128048-oe8eo7hnamaee7bs9b3kb8t8ueglvdut.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA1GY1wPipbLqgwhieQ24De8h4yjpwOotg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "271209128048-oe8eo7hnamaee7bs9b3kb8t8ueglvdut.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -6,14 +6,18 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:layout/screen/menu_prusahan.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
-class AddPostingPage extends StatefulWidget {
+class EditPostingPage extends StatefulWidget {
+  final String postId;
+
+  EditPostingPage({required this.postId});
+
   @override
-  State<AddPostingPage> createState() => _AddPostingPageState();
+  State<EditPostingPage> createState() => _EditPostingPageState();
 }
 
-class _AddPostingPageState extends State<AddPostingPage> {
+class _EditPostingPageState extends State<EditPostingPage> {
   var db = FirebaseFirestore.instance;
-  final TextEditingController namaperusahanController = TextEditingController();
+  final TextEditingController namaperusahaanController = TextEditingController();
   final TextEditingController lokasiController = TextEditingController();
   final TextEditingController profesiController = TextEditingController();
   final TextEditingController persyaratanController = TextEditingController();
@@ -21,6 +25,30 @@ class _AddPostingPageState extends State<AddPostingPage> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController tentangController = TextEditingController();
   File? _imageFile;
+
+  @override
+  void initState() {
+    super.initState();
+    fetchPostData();
+  }
+
+  Future<void> fetchPostData() async {
+    // Dapatkan data postingan berdasarkan ID
+    DocumentSnapshot postSnapshot =
+        await db.collection('postingan').doc(widget.postId).get();
+
+    if (postSnapshot.exists) {
+      // Mengisi nilai-nilai dari data postingan ke field input
+      Map<String, dynamic> postData = postSnapshot.data() as Map<String, dynamic>;
+      namaperusahaanController.text = postData['Namaperusahan'] ?? '';
+      lokasiController.text = postData['Lokasi'] ?? '';
+      profesiController.text = postData['Profesi'] ?? '';
+      persyaratanController.text = postData['Persyaratan'] ?? '';
+      gajiController.text = postData['Gaja'] ?? '';
+      emailController.text = postData['Email'] ?? '';
+      tentangController.text = postData['Tentang'] ?? '';
+    }
+  }
 
   Future<void> _pickImage() async {
     final picker = ImagePicker();
@@ -32,8 +60,8 @@ class _AddPostingPageState extends State<AddPostingPage> {
     }
   }
 
-  Future<void> _uploadImageAndSaveData() async {
-    String namaperusahaan = namaperusahanController.text;
+  Future<void> _updatePost() async {
+    String namaperusahaan = namaperusahaanController.text;
     String Lokasi = lokasiController.text;
     String profesi = profesiController.text;
     String persyaratan = persyaratanController.text;
@@ -49,19 +77,16 @@ class _AddPostingPageState extends State<AddPostingPage> {
       "Gaja": gaji,
       "Email": email,
       "Tentang": tentang,
-      "image":
-          "https://1.bp.blogspot.com/-FjQUlOvcDaI/XpKYTM5eLqI/AAAAAAAALH0/sX0sDZY51EkhaziCI9xTLBbx55YdnuOMgCNcBGAsYHQ/s1600/Universitas%2BAmikom%2BPurwokerto%2B%255Bwww.blogovector.com%255D.png",
     };
 
-    // Tambahkan dokumen ke koleksi "postingan"
-    DocumentReference docRef = await db.collection("postingan").add(loker);
-    String docId = docRef.id;
+    // Perbarui dokumen postingan dengan data yang diperbarui
+    await db.collection("postingan").doc(widget.postId).update(loker);
 
     if (_imageFile != null) {
       // Upload gambar ke Firebase Storage
       final storageRef = firebase_storage.FirebaseStorage.instance
           .ref()
-          .child('images/$docId.jpg');
+          .child('images/${widget.postId}.jpg');
       final uploadTask = storageRef.putFile(_imageFile!);
       await uploadTask.whenComplete(() {
         print('Image uploaded');
@@ -71,29 +96,24 @@ class _AddPostingPageState extends State<AddPostingPage> {
       String imageUrl = await storageRef.getDownloadURL();
 
       // Perbarui URL gambar di dokumen yang sesuai di Firestore
-      await db.collection("postingan").doc(docId).update({
+      await db.collection("postingan").doc(widget.postId).update({
         "image": imageUrl,
       });
       print('Image URL updated in the database');
     }
 
-    Navigator.push(context, MaterialPageRoute(builder: (context) {
-      return PerushaanApp();
-    }));
+    Navigator.pop(context);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-       appBar: AppBar(
+      appBar: AppBar(
+        title: Text('Edit Postingan'),
         backgroundColor: Colors.red,
-        title: Text("Tambah Postingan"),
       ),
-    
       body: SingleChildScrollView(
         child: Container(
-          color: Colors.white,
           padding: EdgeInsets.all(20.0),
           child: Column(
             children: [
@@ -105,7 +125,7 @@ class _AddPostingPageState extends State<AddPostingPage> {
                     Text('NAMA PERUSAHAAN'),
                     SizedBox(height: 14.0),
                     TextField(
-                      controller: namaperusahanController,
+                      controller: namaperusahaanController,
                       decoration: InputDecoration(
                         labelText: 'Masukan Nama',
                         labelStyle: TextStyle(color: Colors.grey),
@@ -193,8 +213,7 @@ class _AddPostingPageState extends State<AddPostingPage> {
                     SizedBox(height: 16.0),
                     TextField(
                       controller: persyaratanController,
-                      maxLines:
-                          null, // Mengatur maxLines menjadi null agar menjadi TextArea
+                      maxLines: null,
                       decoration: InputDecoration(
                         labelText: 'Masukkan teks',
                         border: OutlineInputBorder(),
@@ -261,10 +280,10 @@ class _AddPostingPageState extends State<AddPostingPage> {
               SizedBox(height: 16.0),
               ElevatedButton(
                 onPressed: () async {
-                  await _uploadImageAndSaveData();
+                  await _updatePost();
                 },
                 child: Text(
-                  'Simpan',
+                  'Update',
                   style: TextStyle(color: Colors.white, fontSize: 16.0),
                 ),
                 style: ElevatedButton.styleFrom(
