@@ -25,7 +25,16 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                 color: Colors.red,
               ),
             ),
-            
+            ListTile(
+              leading: Icon(Icons.home), // Ikon "Home"
+              title: Text('Menu pilihan'),
+              onTap: () {
+                // Aksi ketika item di sidebar ditekan
+                  Navigator.push(context, MaterialPageRoute(builder: (context){
+                        return MenuHomeApp();
+                      }));
+              },
+            ),
             ListTile(
               leading: Icon(Icons.search), // Ikon "Home"
               title: Text('Info Loker'),
